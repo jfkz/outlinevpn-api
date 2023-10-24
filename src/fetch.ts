@@ -9,7 +9,7 @@ const controller = new AbortController()
 // see https://github.com/Jigsaw-Code/outline-server/blob/9fc83859c22ff502f9577916776dcb24007b89c9/src/server_manager/electron_app/fetch.ts#L23
 export default async function fetchWithPin(
   req: HttpRequest,
-  fingerprint: string,
+  fingerprint?: string,
   timeout: number = 10000,
 ): Promise<HttpResponse> {
   const response = await new Promise<IncomingMessage>((resolve, reject) => {
@@ -33,7 +33,7 @@ export default async function fetchWithPin(
       request.socket.on('secureConnect', () => {
         const socket = request.socket as TLSSocket
         const cert = socket.getPeerCertificate()
-        if (cert.fingerprint256 !== fingerprint) {
+        if (fingerprint && cert.fingerprint256 !== fingerprint) {
           reject(new Error(`Certificate fingerprint does not match ${fingerprint}`))
         }
       })

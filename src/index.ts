@@ -10,7 +10,7 @@ import type {
 
 class OutlineVPN {
     apiUrl: string
-    fingerprint: string
+    fingerprint?: string
     timeout?: number
     constructor(options: Options) {
         this.apiUrl = options.apiUrl
