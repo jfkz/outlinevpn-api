@@ -6,7 +6,7 @@ export interface Options {
     /**
      * The sha256 fingerprint of the server's certificate.
      */
-    fingerprint: string
+    fingerprint?: string
     /**
      * The number of milliseconds to wait before timing out a request.
      * @default 10000
